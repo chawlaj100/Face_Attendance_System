@@ -96,7 +96,7 @@ with open("data/features_all.csv", "a+", newline="") as csvfile:
         if person in exists_features_id:
             print("====================================================== ALREADY EXISTS" , person ," =================================================")
         else:
-            # Get the mean/average features of face/personX, it will be a list with a length of 128D
+            # Get the mean/average features of face/personX, it will be a list with a size of 128 units
             print(path_images_from_camera + person)
             features_mean_personX = return_features_mean_personX(path_images_from_camera + person , person)
             writer.writerow(features_mean_personX)
