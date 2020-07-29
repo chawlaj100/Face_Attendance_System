@@ -19,7 +19,7 @@ current_face_dir = ""
 path_photos_from_camera = "data/data_faces_from_camera/"
 
 
-# 1. Make directory for saving photos and csv
+# Make directory for saving photos and csv
 def pre_work_mkdir():
 
     # Make folders to save faces images and csv
@@ -31,7 +31,7 @@ def pre_work_mkdir():
 
 pre_work_mkdir()
 
-# 2. Delete the old data
+# Delete the old data
 def pre_work_del_old_face_folders():
     folders_rd = os.listdir(path_photos_from_camera)
     for i in range(len(folders_rd)):
@@ -40,12 +40,12 @@ def pre_work_del_old_face_folders():
     if os.path.isfile("data/features_all.csv"):
         os.remove("data/features_all.csv")
 
-# If enable this function, it will delete all the old data in dir person_1,person_2,person_3...
+# Uncomment the below line to delete the old data in directories person_1, person_2, person_3...
 # pre_work_del_old_face_folders()
 ##################################
 
 
-# 3. Checking order of people: person_cnt
+# Checking order of people: person_cnt
 # If the old folders exists
 if os.listdir("data/data_faces_from_camera/"):
     # Get the num of latest person
@@ -77,14 +77,12 @@ while cap.isOpened():
     # Font
     font = cv2.FONT_ITALIC
 
-    # 4.  'n'  / press 'n' to create the folders for saving faces
+    # press 'n' to create the folders for saving faces
     if kk == ord('n'):
         # person_cnt += 1
         while True:
             print("Enter Folder Name")
             new_dir_name = input()
-
-            # current_face_dir = path_photos_from_camera + "person_" + str(person_cnt)
 
             current_face_dir = path_photos_from_camera + new_dir_name
             if os.path.isdir(current_face_dir) == False:
@@ -98,7 +96,7 @@ while cap.isOpened():
         cnt_ss = 0              #  clear the count of faces
         press_n_flag = 1        #  'n' have pressed 'n'
 
-    #  Face detected ?
+    # Face detected ?
     if len(faces) != 0:
         # Show the rectangle box of face
         for k, d in enumerate(faces):
