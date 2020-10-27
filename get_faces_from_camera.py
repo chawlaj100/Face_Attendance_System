@@ -7,7 +7,7 @@ import shutil
 detector = dlib.get_frontal_face_detector()
 
 # OpenCv Uses camera
-cap = cv2.VideoCapture(1)
+cap = cv2.VideoCapture(0)
 
 # The counter for screen-shot
 cnt_ss = 0

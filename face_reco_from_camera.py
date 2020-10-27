@@ -6,11 +6,12 @@ import os
 import datetime as dt
 import csv
 
-import smtplib
-from email.mime.multipart import MIMEMultipart
-from email.mime.text import MIMEText
-from email.mime.base import MIMEBase
-from email import encoders
+# imports used for sending mail. Uncomment the next 5 lines for enabling the mail service.
+#import smtplib
+#from email.mime.multipart import MIMEMultipart
+#from email.mime.text import MIMEText
+#from email.mime.base import MIMEBase
+#from email import encoders
 
 # import mysql.connector
 from string import Template
@@ -67,15 +68,15 @@ if os.path.exists("data/features_all.csv"):
 
     for i in range(csv_rd.shape[0]):
         features_someone_arr = []
-        for j in range(0, len(csv_rd.ix[i, :])):
+        for j in range(0, len(csv_rd.iloc[i, :])):
             if j==0:
-                attend[str(csv_rd.ix[i, :][j]).replace(".0" , "")] = 0
-                verify[str(csv_rd.ix[i, :][j]).replace(".0" , "")] = 0
-                features_person_name.append(str(csv_rd.ix[i, :][j]).replace(".0" , "") )
-                # print(csv_rd.ix[i, :][j])
+                attend[str(csv_rd.iloc[i, :][j]).replace(".0" , "")] = 0
+                verify[str(csv_rd.iloc[i, :][j]).replace(".0" , "")] = 0
+                features_person_name.append(str(csv_rd.iloc[i, :][j]).replace(".0" , "") )
+                # print(csv_rd.iloc[i, :][j])
                 # exit()
             else: 
-                features_someone_arr.append(csv_rd.ix[i, :][j])
+                features_someone_arr.append(csv_rd.iloc[i, :][j])
         features_known_arr.append(features_someone_arr)
     print(attend)
     # exit()
@@ -88,7 +89,7 @@ if os.path.exists("data/features_all.csv"):
     # The detected faces are passed to predictor which checks for the feature-match for each face 
     predictor = dlib.shape_predictor('data/data_dlib/shape_predictor_68_face_landmarks.dat')
 
-    
+    threshold = 5    
     cap = cv2.VideoCapture(0)
     # cap = cv2.VideoCapture(1) # For any video devices connected through USB 
     # cap = cv2. VideoCapture("http://192.168.43.227:4747/video")
@@ -188,6 +189,8 @@ if os.path.exists("data/features_all.csv"):
     df.to_csv("attendance_"+str(today_date)+".csv", index=False, header=True)
 
     # Sending csv generated through mail
+    # Uncomment the below code up to the print statement for sending mails
+    """
     sender_address = 'abc@gmail.com'
     sender_pass = '**********'
     receiver_address = 'xyz@gmail.com'
@@ -213,6 +216,7 @@ if os.path.exists("data/features_all.csv"):
     session.quit()
     
     print("Mail Sent Successfully")
+    """
 
     if "cap" in globals():
         cap.release()
