@@ -18,7 +18,7 @@ if os.path.isfile("data/features_all.csv") :
     csv_rd = pd.read_csv("data/features_all.csv", header=None)
 
     for i in range(csv_rd.shape[0]):
-        exists_features_id.append(str(csv_rd.ix[i, :][0]).replace(".0" , ""))
+        exists_features_id.append(str(csv_rd.iloc[i, :][0]).replace(".0" , ""))
     
     print("File exists")    
     print(exists_features_id)    
